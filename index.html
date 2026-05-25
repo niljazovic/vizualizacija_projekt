@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Europska Elita — FC Barcelona & UCL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-badge">VP Projekt 2026</div>
+      <h1>EUROPSKA ELITA</h1>
+      <p class="header-sub">FC Barcelona (La Liga) &amp; UEFA Liga Prvaka — Analiza podataka 2016–2025</p>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="barca">FC Barcelona</button>
+    <button class="tab-btn" data-tab="ucl">UEFA Liga Prvaka</button>
+  </nav>
+
+  <!-- BARCELONA TAB -->
+  <section class="tab-content active" id="tab-barca">
+
+    <div class="section-header">
+      <span class="section-tag">Vizualizacija 1</span>
+      <h2>Uspješnost po sezoni — La Liga</h2>
+      <p>Pregled pobjeda, poraza, remija i golova FC Barcelone od 2016. do 2025.</p>
+    </div>
+
+    <div class="controls">
+      <label>Prikaz:
+        <select id="metric-filter">
+          <option value="results">Rezultati (W/D/L)</option>
+          <option value="goals">Golovi</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="chart-card">
+      <div id="barca-line-chart"></div>
+      <div class="tooltip" id="tooltip-line"></div>
+    </div>
+
+    <div class="section-header" style="margin-top:3rem">
+      <span class="section-tag">Vizualizacija 2</span>
+      <h2>Domaći vs. Gostujući — La Liga</h2>
+      <p>Usporedba postotka pobjeda Barcelone ovisno o terenu igre, po sezoni.</p>
+    </div>
+
+    <div class="chart-card">
+      <div id="barca-grouped-bar"></div>
+      <div class="tooltip" id="tooltip-bar"></div>
+    </div>
+
+  </section>
+
+  <!-- UCL TAB -->
+  <section class="tab-content" id="tab-ucl">
+
+    <div class="section-header">
+      <span class="section-tag">Vizualizacija 3</span>
+      <h2>Dominacija Klubova — All Time</h2>
+      <p>Top klubovi prema ukupnom broju pobjeda u UEFA Ligi prvaka.</p>
+    </div>
+
+    <div class="controls">
+      <label>Broj klubova:
+        <select id="top-n-filter">
+          <option value="10">Top 10</option>
+          <option value="15" selected>Top 15</option>
+          <option value="20">Top 20</option>
+        </select>
+      </label>
+      <label>Sortiraj po:
+        <select id="sort-filter">
+          <option value="W">Pobjede</option>
+          <option value="M.">Utakmice</option>
+          <option value="Pt.">Bodovi</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="chart-card">
+      <div id="ucl-bar-chart"></div>
+      <div class="tooltip" id="tooltip-ucl-bar"></div>
+    </div>
+
+    <div class="section-header" style="margin-top:3rem">
+      <span class="section-tag">Vizualizacija 4</span>
+      <h2>Pobjednici finala (1955–2023)</h2>
+      <p>Kronološki prikaz svakog UCL finala — pobjednik, poraženi i zemlja.</p>
+    </div>
+
+    <div class="controls">
+      <label>Filtriranje po zemlji:
+        <select id="country-filter">
+          <option value="all">Sve zemlje</option>
+          <option value="Spain">Španjolska</option>
+          <option value="England">Engleska</option>
+          <option value="Italy">Italija</option>
+          <option value="Germany">Njemačka</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Netherlands">Nizozemska</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="chart-card timeline-card">
+      <div id="ucl-timeline"></div>
+      <div class="tooltip" id="tooltip-timeline"></div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Vizualizacija podataka — FERIT Osijek, 2025. | Podatci: football-data.co.uk, Kaggle</p>
+  </footer>
+
+  <script src="js/barca-line.js"></script>
+  <script src="js/barca-grouped.js"></script>
+  <script src="js/ucl-bar.js"></script>
+  <script src="js/ucl-timeline.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
