@@ -1,6 +1,5 @@
-// ── Main: Tab navigacija ──────────────────────────────────────
 document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', function () {
+  btn.addEventListener('click', function() {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(s => s.classList.remove('active'));
     this.classList.add('active');

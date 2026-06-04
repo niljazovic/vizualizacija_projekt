@@ -1,43 +1,43 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Europska Elita — FC Barcelona & UCL</title>
+  <title>European Elite - FC Barcelona & UCL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
   <header>
     <div class="header-inner">
-      <div class="header-badge">VP Projekt 2026</div>
-      <h1>EUROPSKA ELITA</h1>
-      <p class="header-sub">FC Barcelona (La Liga) &amp; UEFA Liga Prvaka — Analiza podataka 2016–2025</p>
+      <div class="header-badge">Data Visualization Project 2026</div>
+      <h1>EUROPEAN ELITE</h1>
     </div>
   </header>
 
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="barca">FC Barcelona</button>
-    <button class="tab-btn" data-tab="ucl">UEFA Liga Prvaka</button>
+    <button class="tab-btn" data-tab="ucl">UEFA Champions League</button>
   </nav>
 
   <!-- BARCELONA TAB -->
   <section class="tab-content active" id="tab-barca">
 
     <div class="section-header">
-      <span class="section-tag">Vizualizacija 1</span>
-      <h2>Uspješnost po sezoni — La Liga</h2>
-      <p>Pregled pobjeda, poraza, remija i golova FC Barcelone od 2016. do 2025.</p>
+      <span class="section-tag">Visualization 1</span>
+      <h2>Season Performance - La Liga</h2>
+      <p>Overview of FC Barcelona's wins, draws, losses and goals from 2016 to 2025.</p>
     </div>
 
     <div class="controls">
-      <label>Prikaz:
+      <label>Display:
         <select id="metric-filter">
-          <option value="results">Rezultati (W/D/L)</option>
-          <option value="goals">Golovi</option>
+          <option value="results">Results (W/D/L)</option>
+          <option value="goals">Goals</option>
         </select>
       </label>
     </div>
@@ -48,14 +48,25 @@
     </div>
 
     <div class="section-header" style="margin-top:3rem">
-      <span class="section-tag">Vizualizacija 2</span>
-      <h2>Domaći vs. Gostujući — La Liga</h2>
-      <p>Usporedba postotka pobjeda Barcelone ovisno o terenu igre, po sezoni.</p>
+      <span class="section-tag">Visualization 2</span>
+      <h2>Home vs. Away - La Liga</h2>
+      <p>Comparison of Barcelona's win percentage depending on home or away venue, per season.</p>
     </div>
 
     <div class="chart-card">
       <div id="barca-grouped-bar"></div>
       <div class="tooltip" id="tooltip-bar"></div>
+    </div>
+
+    <div class="section-header" style="margin-top:3rem">
+      <span class="section-tag">Visualization 5</span>
+      <h2>Shooting vs. Scoring - Multidimensional View</h2>
+      <p>Each bubble is a La Liga season. X = avg shots on target per game · Y = avg goals scored per game · Bubble size = win rate · Color = era (blue → red).</p>
+    </div>
+
+    <div class="chart-card">
+      <div id="barca-scatter"></div>
+      <div class="tooltip" id="tooltip-scatter"></div>
     </div>
 
   </section>
@@ -64,24 +75,24 @@
   <section class="tab-content" id="tab-ucl">
 
     <div class="section-header">
-      <span class="section-tag">Vizualizacija 3</span>
-      <h2>Dominacija Klubova — All Time</h2>
-      <p>Top klubovi prema ukupnom broju pobjeda u UEFA Ligi prvaka.</p>
+      <span class="section-tag">Visualization 3</span>
+      <h2>Club Dominance - All Time</h2>
+      <p>Top clubs by total wins, matches, or points in the UEFA Champions League.</p>
     </div>
 
     <div class="controls">
-      <label>Broj klubova:
+      <label>Number of clubs:
         <select id="top-n-filter">
           <option value="10">Top 10</option>
           <option value="15" selected>Top 15</option>
           <option value="20">Top 20</option>
         </select>
       </label>
-      <label>Sortiraj po:
+      <label>Sort by:
         <select id="sort-filter">
-          <option value="W">Pobjede</option>
-          <option value="M.">Utakmice</option>
-          <option value="Pt.">Bodovi</option>
+          <option value="W">Wins</option>
+          <option value="M.">Matches</option>
+          <option value="Pt.">Points</option>
         </select>
       </label>
     </div>
@@ -92,23 +103,24 @@
     </div>
 
     <div class="section-header" style="margin-top:3rem">
-      <span class="section-tag">Vizualizacija 4</span>
-      <h2>Pobjednici finala (1955–2023)</h2>
-      <p>Kronološki prikaz svakog UCL finala — pobjednik, poraženi i zemlja.</p>
+      <span class="section-tag">Visualization 4</span>
+      <h2>Finals History (1955–2023)</h2>
+      <p>Chronological view of every UCL final - winner, runner-up, and country. Use Play to animate through history.</p>
     </div>
 
     <div class="controls">
-      <label>Filtriranje po zemlji:
+      <label>Filter by country:
         <select id="country-filter">
-          <option value="all">Sve zemlje</option>
-          <option value="Spain">Španjolska</option>
-          <option value="England">Engleska</option>
-          <option value="Italy">Italija</option>
-          <option value="Germany">Njemačka</option>
+          <option value="all">All countries</option>
+          <option value="Spain">Spain</option>
+          <option value="England">England</option>
+          <option value="Italy">Italy</option>
+          <option value="Germany">Germany</option>
           <option value="Portugal">Portugal</option>
-          <option value="Netherlands">Nizozemska</option>
+          <option value="Netherlands">Netherlands</option>
         </select>
       </label>
+      <button class="play-btn" id="timeline-play-btn">&#9654; Play</button>
     </div>
 
     <div class="chart-card timeline-card">
@@ -116,16 +128,34 @@
       <div class="tooltip" id="tooltip-timeline"></div>
     </div>
 
+    <div class="section-header" style="margin-top:3rem">
+      <span class="section-tag">Visualization 6</span>
+      <h2>Europe Map - UCL Country Dominance</h2>
+      <p>Countries shaded by UCL wins. Click a country to see its clubs and years — also updates the timeline and highlights the bar chart above.</p>
+    </div>
+
+    <div class="chart-card map-card">
+      <div class="map-container">
+        <div id="ucl-map"></div>
+        <div class="map-panel" id="map-panel">
+          <p class="map-panel-hint">Click a country on the map to explore its UCL history.</p>
+        </div>
+      </div>
+      <div class="tooltip" id="tooltip-map"></div>
+    </div>
+
   </section>
 
   <footer>
-    <p>Vizualizacija podataka — FERIT Osijek, 2025. | Podatci: football-data.co.uk, Kaggle</p>
+    <p>Data Visualization - FERIT Osijek, 2026</p>
   </footer>
 
   <script src="js/barca-line.js"></script>
   <script src="js/barca-grouped.js"></script>
   <script src="js/ucl-bar.js"></script>
   <script src="js/ucl-timeline.js"></script>
+  <script src="js/ucl-map.js"></script>
+  <script src="js/barca-scatter.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
